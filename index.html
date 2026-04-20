@@ -62,13 +62,15 @@
             color:#2b6cb0;
         }
 
-        /* 💙 TEXT (FIXED FOR MOBILE) */
+        /* 💙 TEXT */
         #typedText{
             color:#333;
             text-align:left;
             white-space:pre-wrap;
             font-size:16px;
             line-height:1.5;
+            word-break:break-word;
+            overflow-wrap:break-word;
         }
 
         button{
@@ -140,7 +142,7 @@
 // 💌 OPEN LETTER
 function openLetter(){
     document.getElementById("popup").style.display="block";
-    document.getElementById("typedText").innerHTML = "";
+    document.getElementById("typedText").textContent = "";
     i = 0;
     typeWriter();
     heartExplosion();
@@ -158,12 +160,14 @@ ps. Next time napo yung gift wala pa kase me budget hehe mwua 💙`;
 
 let i = 0;
 
-// ✍️ TYPEWRITER (CLEAN FIX)
+// ✍️ STABLE TYPEWRITER (NO BLINK)
 function typeWriter(){
+    const textElement = document.getElementById("typedText");
+
     if(i < message.length){
-        document.getElementById("typedText").innerHTML += message.charAt(i);
+        textElement.textContent = message.substring(0, i + 1);
         i++;
-        setTimeout(typeWriter, 35);
+        setTimeout(typeWriter, 30);
     }
 }
 
@@ -180,7 +184,18 @@ setInterval(() => {
     setTimeout(() => heart.remove(), 8000);
 }, 300);
 
-
+// 💥 HEART EXPLOSION
+function heartExplosion(){
+    for(let i=0;i<25;i++){
+        const heart=document.createElement("div");
+        heart.innerHTML="💙";
+        heart.style.position="fixed";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.top="50vh";
+        heart.style.fontSize="20px";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),3000);
+    }
 }
 
 </script>
