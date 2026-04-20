@@ -3,7 +3,7 @@
 <head>
     <title>For Bab 💙</title>
 
-    <!-- 📱 IMPORTANT FOR PHONE -->
+    <!-- 📱 MOBILE FIX -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
@@ -32,7 +32,7 @@
             100%{ transform:scale(1); }
         }
 
-        /* 💌 POPUP LETTER */
+        /* 💌 POPUP */
         .popup{
             display:none;
             position:fixed;
@@ -62,6 +62,7 @@
             color:#2b6cb0;
         }
 
+        /* ✍️ TEXT */
         #typedText{
             color:#333;
             text-align:left;
@@ -70,10 +71,12 @@
             line-height:1.5;
         }
 
-        /* blinking cursor */
-        #typedText::after{
-            content:"|";
+        /* ✨ FIXED CURSOR (no glitch) */
+        .cursor{
+            display:inline-block;
+            width:10px;
             animation: blink 1s infinite;
+            color:#4da6ff;
         }
 
         @keyframes blink{
@@ -130,54 +133,54 @@
 
 <body>
 
-<!-- 🌌 floating background -->
 <div class="hearts"></div>
 
 <h2>Click the heart Bab 💙</h2>
 <div class="heart" onclick="openLetter()">💙</div>
 
-<!-- 💌 LETTER POPUP -->
+<!-- 💌 LETTER -->
 <div class="popup" id="popup">
     <div class="letter">
         <h3>Happy 1st Monthsary Bab 💙</h3>
 
-        <p id="typedText"></p>
+        <p id="typedText"></p><span class="cursor" id="cursor">|</span>
 
         <button onclick="closeLetter()">Close</button>
     </div>
 </div>
 
-
 <script>
 
-// 💌 OPEN LETTER
+// 💌 OPEN
 function openLetter(){
     document.getElementById("popup").style.display="block";
+    i = 0;
+    document.getElementById("typedText").innerHTML = "";
+    document.getElementById("cursor").style.display = "inline-block";
     typeWriter();
     heartExplosion();
-
 }
 
-// ❌ CLOSE LETTER
+// ❌ CLOSE
 function closeLetter(){
     document.getElementById("popup").style.display="none";
-
-    let music = document.getElementById("bgMusic");
-    if(music) music.pause();
 }
 
-// ✍️ TYPEWRITER MESSAGE
+// ✍️ MESSAGE
 const message = `Hi Bab! Happy Monthsarry po hehe sorry po if nag cause ako always ng problem sayo and nag-tatampo ako, but lagi mopong tandaan na nandito lang po ako always mag support at handang umalalay sa lahat ng desisyon mopo mahal na mahal po kita bab ko. Happy Monthsary po! Ingat ka always bab. I Love you po 😗💙
 
 ps. Next time napo yung gift wala pa kase me budget hehe mwua 💙`;
 
 let i = 0;
 
+// ✍️ TYPEWRITER (FIXED)
 function typeWriter(){
     if(i < message.length){
         document.getElementById("typedText").innerHTML += message.charAt(i);
         i++;
         setTimeout(typeWriter, 35);
+    } else {
+        document.getElementById("cursor").style.display = "none";
     }
 }
 
@@ -194,7 +197,7 @@ setInterval(() => {
     setTimeout(() => heart.remove(), 8000);
 }, 300);
 
-// 💙 HEART EXPLOSION
+// 💥 HEART EXPLOSION
 function heartExplosion(){
     for(let i=0;i<25;i++){
         const heart=document.createElement("div");
@@ -203,7 +206,6 @@ function heartExplosion(){
         heart.style.left=Math.random()*100+"vw";
         heart.style.top="50vh";
         heart.style.fontSize="20px";
-        heart.style.animation="floatUp 3s linear";
         document.body.appendChild(heart);
         setTimeout(()=>heart.remove(),3000);
     }
