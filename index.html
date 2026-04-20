@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>For Bab 💙</title>
+
+    <!-- 📱 IMPORTANT FOR PHONE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body{
+            background:#eef6ff;
+            font-family:'Courier New', monospace;
+            text-align:center;
+            padding-top:120px;
+            overflow-x:hidden;
+        }
+
+        h2{
+            color:#2b6cb0;
+        }
+
+        /* 💙 HEART BUTTON */
+        .heart{
+            font-size:90px;
+            cursor:pointer;
+            animation: beat 1s infinite;
+        }
+
+        @keyframes beat{
+            0%{ transform:scale(1); }
+            50%{ transform:scale(1.15); }
+            100%{ transform:scale(1); }
+        }
+
+        /* 💌 POPUP LETTER */
+        .popup{
+            display:none;
+            position:fixed;
+            top:0; left:0;
+            width:100%; height:100%;
+            background:rgba(0,0,0,0.5);
+        }
+
+        .letter{
+            background:white;
+            width:90%;
+            max-width:420px;
+            margin:80px auto;
+            padding:20px;
+            border-radius:15px;
+            box-shadow:0 0 25px rgba(0,0,0,0.2);
+            border-top:10px solid #4da6ff;
+            animation: pop 0.5s ease;
+        }
+
+        @keyframes pop{
+            from{ transform:scale(0.5); opacity:0;}
+            to{ transform:scale(1); opacity:1;}
+        }
+
+        h3{
+            color:#2b6cb0;
+        }
+
+        #typedText{
+            color:#333;
+            text-align:left;
+            white-space:pre-line;
+            font-size:16px;
+            line-height:1.5;
+        }
+
+        /* blinking cursor */
+        #typedText::after{
+            content:"|";
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink{
+            0%{opacity:1;}
+            50%{opacity:0;}
+            100%{opacity:1;}
+        }
+
+        button{
+            margin-top:15px;
+            padding:10px 20px;
+            border:none;
+            background:#4da6ff;
+            color:white;
+            border-radius:8px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#2b6cb0;
+        }
+
+        /* 🌌 FLOATING HEARTS */
+        .hearts{
+            position:fixed;
+            width:100%;
+            height:100%;
+            top:0;
+            left:0;
+            overflow:hidden;
+            z-index:-1;
+        }
+
+        .heart-float{
+            position:absolute;
+            color:#4da6ff;
+            animation: floatUp 8s linear infinite;
+            font-size:20px;
+        }
+
+        @keyframes floatUp{
+            from{
+                transform:translateY(100vh);
+                opacity:1;
+            }
+            to{
+                transform:translateY(-10vh);
+                opacity:0;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- 🌌 floating background -->
+<div class="hearts"></div>
+
+<h2>Click the heart Bab 💙</h2>
+<div class="heart" onclick="openLetter()">💙</div>
+
+<!-- 💌 LETTER POPUP -->
+<div class="popup" id="popup">
+    <div class="letter">
+        <h3>Happy 1st Monthsary Bab 💙</h3>
+
+        <p id="typedText"></p>
+
+        <button onclick="closeLetter()">Close</button>
+    </div>
+</div>
+
+
+<script>
+
+// 💌 OPEN LETTER
+function openLetter(){
+    document.getElementById("popup").style.display="block";
+    typeWriter();
+    heartExplosion();
+
+}
+
+// ❌ CLOSE LETTER
+function closeLetter(){
+    document.getElementById("popup").style.display="none";
+
+    let music = document.getElementById("bgMusic");
+    if(music) music.pause();
+}
+
+// ✍️ TYPEWRITER MESSAGE
+const message = `Hi Bab! Happy Monthsarry po hehe sorry po if nag cause ako always ng problem sayo and nag-tatampo ako, but lagi mopong tandaan na nandito lang po ako always mag support at handang umalalay sa lahat ng desisyon mopo mahal na mahal po kita bab ko. Happy Monthsary po! Ingat ka always bab. I Love you po 😗💙
+
+ps. Next time napo yung gift wala pa kase me budget hehe mwua 💙`;
+
+let i = 0;
+
+function typeWriter(){
+    if(i < message.length){
+        document.getElementById("typedText").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeWriter, 35);
+    }
+}
+
+// 🌌 FLOATING HEARTS
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart-float";
+    heart.innerHTML = "💙";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+
+    document.querySelector(".hearts").appendChild(heart);
+
+    setTimeout(() => heart.remove(), 8000);
+}, 300);
+
+// 💙 HEART EXPLOSION
+function heartExplosion(){
+    for(let i=0;i<25;i++){
+        const heart=document.createElement("div");
+        heart.innerHTML="💙";
+        heart.style.position="fixed";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.top="50vh";
+        heart.style.fontSize="20px";
+        heart.style.animation="floatUp 3s linear";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),3000);
+    }
+}
+
+</script>
+
+</body>
+</html>
