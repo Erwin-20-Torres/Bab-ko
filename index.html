@@ -62,27 +62,13 @@
             color:#2b6cb0;
         }
 
-        /* ✍️ TEXT */
+        /* 💙 TEXT (FIXED FOR MOBILE) */
         #typedText{
             color:#333;
             text-align:left;
-            white-space:pre-line;
+            white-space:pre-wrap;
             font-size:16px;
             line-height:1.5;
-        }
-
-        /* ✨ FIXED CURSOR (no glitch) */
-        .cursor{
-            display:inline-block;
-            width:10px;
-            animation: blink 1s infinite;
-            color:#4da6ff;
-        }
-
-        @keyframes blink{
-            0%{opacity:1;}
-            50%{opacity:0;}
-            100%{opacity:1;}
         }
 
         button{
@@ -143,7 +129,7 @@
     <div class="letter">
         <h3>Happy 1st Monthsary Bab 💙</h3>
 
-        <p id="typedText"></p><span class="cursor" id="cursor">|</span>
+        <p id="typedText"></p>
 
         <button onclick="closeLetter()">Close</button>
     </div>
@@ -151,17 +137,16 @@
 
 <script>
 
-// 💌 OPEN
+// 💌 OPEN LETTER
 function openLetter(){
     document.getElementById("popup").style.display="block";
-    i = 0;
     document.getElementById("typedText").innerHTML = "";
-    document.getElementById("cursor").style.display = "inline-block";
+    i = 0;
     typeWriter();
     heartExplosion();
 }
 
-// ❌ CLOSE
+// ❌ CLOSE LETTER
 function closeLetter(){
     document.getElementById("popup").style.display="none";
 }
@@ -173,14 +158,12 @@ ps. Next time napo yung gift wala pa kase me budget hehe mwua 💙`;
 
 let i = 0;
 
-// ✍️ TYPEWRITER (FIXED)
+// ✍️ TYPEWRITER (CLEAN FIX)
 function typeWriter(){
     if(i < message.length){
         document.getElementById("typedText").innerHTML += message.charAt(i);
         i++;
         setTimeout(typeWriter, 35);
-    } else {
-        document.getElementById("cursor").style.display = "none";
     }
 }
 
@@ -197,18 +180,7 @@ setInterval(() => {
     setTimeout(() => heart.remove(), 8000);
 }, 300);
 
-// 💥 HEART EXPLOSION
-function heartExplosion(){
-    for(let i=0;i<25;i++){
-        const heart=document.createElement("div");
-        heart.innerHTML="💙";
-        heart.style.position="fixed";
-        heart.style.left=Math.random()*100+"vw";
-        heart.style.top="50vh";
-        heart.style.fontSize="20px";
-        document.body.appendChild(heart);
-        setTimeout(()=>heart.remove(),3000);
-    }
+
 }
 
 </script>
